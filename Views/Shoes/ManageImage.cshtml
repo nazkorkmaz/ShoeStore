@@ -1,0 +1,44 @@
+﻿@model ShoeStore.Models.Shoe
+
+@{
+    ViewData["Title"] = "ManageImage";
+}
+
+<h1>Resmi Düzenle</h1>
+
+<div>
+    <h4>Shoe</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+    <ul>
+        @foreach (var image in Model.ShoeImages)
+        {
+            <li>
+                @image.FileName
+                <img src="~/UserImages/@image.FileName" />
+            </li>
+        }
+    </ul>
+    <form asp-action="UploadImage" enctype="multipart/form-data">
+        <input type="hidden" name="ShoeId" id="ShoeId" value="@Model.Id" />
+        <input type="file" name="ImageFile" id="ImageFile" />
+        <input type="submit" value="Yükle" />
+    </form>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

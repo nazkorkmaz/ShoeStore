@@ -1,0 +1,8 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@if(@User.Identity.Name=="admin@admin.com")
+{
+    Layout = "_AdminLayout";
+}

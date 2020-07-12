@@ -1,0 +1,10 @@
+﻿@model ShoeStore.ViewModel.SearchViewModel
+    <div class="header-search">
+        <form asp-action="Search" asp-controller="Home">
+            <input asp-for="SearchText" class="input search-input" type="text" placeholder="Arama metnini giriniz.">
+            
+          
+            <button class="search-btn"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+

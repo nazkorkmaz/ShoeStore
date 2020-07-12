@@ -1,0 +1,21 @@
+﻿@model ShoeStore.Models.Shoe
+
+    <div class="custom-menu">
+        <div id="shopping-cart">
+            <div class="shopping-cart-list">
+                <div class="product product-widget">
+                    @{
+                        var imageUrl = Model.ShoeImages?.FirstOrDefault()?.FileName ?? "noimage.png";
+                    }
+                    <div class="product-thumb">
+                        <img src="~/UserImages/@imageUrl" alt="">
+                    </div>
+                    <div class="product-body">
+                        <h3 class="product-price">@Model.Price <span class="qty">x3</span></h3>
+                        <h2 class="product-name"><a href="#">@Model.Name</a></h2>
+                    </div>
+                    <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>

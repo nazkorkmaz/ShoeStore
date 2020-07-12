@@ -1,0 +1,94 @@
+﻿@model List<Shoe>
+
+@{
+    ViewData["Title"] = "Alışveriş";
+}
+
+
+<div class="store-filter clearfix">
+    <div class="pull-left">
+        <div class="row-filter">
+            <a href="#"><i class="fa fa-th-large"></i></a>
+            <a href="#" class="active"><i class="fa fa-bars"></i></a>
+        </div>
+        <div class="sort-filter">
+            <span class="text-uppercase">Sıralama:</span>
+            <select class="input">
+                <option value="0">Fiyat</option>
+                <option value="0">Değerlendirme</option>
+            </select>
+            <a href="#" class="main-btn icon-btn"><i class="fa fa-arrow-down"></i></a>
+
+        </div>
+    </div>
+    <div class="pull-right">
+        <div class="page-filter">
+            <span class="text-uppercase">Göster:</span>
+            <select class="input">
+                <option value="0">10</option>
+                <option value="1">20</option>
+                <option value="2">30</option>
+            </select>
+        </div>
+        <ul class="store-pages">
+            <li><span class="text-uppercase">Sayfa:</span></li>
+            <li class="active">1</li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+        </ul>
+    </div>
+</div>
+@{
+    int total = 4;
+}
+<table>
+    <tbody>
+        <tr>
+
+            @foreach (var item in Model)
+            {
+                    <div class="section">
+                        <div class="container">
+                            <div class="row">
+                                <div id="main" class="col-md-9">
+                                    <div id="store">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-6 col-xs-6">
+                                                <div class="product product-single">
+                                                    <div class="product-thumb">
+                                                        @{
+                                                            var imageUrl = item.ShoeImages?.FirstOrDefault()?.FileName ?? "noimage.png";
+                                                        }
+                                                        <a asp-area="" asp-controller="Shoes" asp-action="Details" asp-route-id="@item.Id" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Hızlı Bak</a>
+                                                        <img src="~/UserImages/@imageUrl" width="150" height="150" alt="">
+                                                    </div>
+                                                    <div class="product-body">
+                                                        <h3 class="product-price">@item.Price</h3>
+                                                        <div class="product-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                        <h2 class="product-name"><a href="#">@item.Name</a></h2>
+                                                        <div class="product-btns">
+                                                            <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                                                            <button class="primary-btn add-to-cart" asp-route-id="@item.Id"><i class="fa fa-shopping-cart"></i> Sepete Ekle</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix visible-sm visible-xs"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            }
+
+        </tr>
+        </tbody>
+</table>

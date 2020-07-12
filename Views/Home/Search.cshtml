@@ -1,0 +1,100 @@
+﻿@model ShoeStore.ViewModel.SearchViewModel
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Search">
+            <div class="form-group">
+                <label asp-for="SearchText" class="control-label"></label>
+                <input asp-for="SearchText" class="form-control" />
+
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SearchInDescription" /> Açıklamalarda Ara
+                </label>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                    <option value="">Tüm Kategoriler</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label"></label>
+                <select asp-for="BrandId" class="form-control" asp-items="ViewBag.BrandId">
+                    <option value="">Tüm Markalar</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinPrice" class="control-label"></label>
+                <input asp-for="MinPrice" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxPrice" class="control-label"></label>
+                <input asp-for="MaxPrice" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ara" class="btn-dark" />
+            </div>
+        </form>
+    </div>
+</div>
+@if (Model?.Results != null)
+{
+    <h3>Arama Sonuçları</h3>
+    <h5>@Model.Results.Count Adet Ayakkabı Bulundu.</h5>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                       İsim
+                    </th>
+                    <th>
+                        Marka
+                    </th>
+                    <th>
+                       Fiyat
+                    </th>         
+                    <th>
+                       Kategori
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Results)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Brand.Name)
+                        </td>            
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.Name)
+                        </td>
+                        <td>
+                            <a asp-controller="Shoes" asp-action="Details" asp-route-id="@item.Id">Details</a>6
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+}
+
+
